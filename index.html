@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スマホの動き検知</title>
+</head>
+<body>
+    <h1>スマホを動かしてみて！</h1>
+    <p id="acceleration">加速度: 取得中…</p>
+    <p id="rotation">回転: 取得中…</p>
+
+    <script>
+        if (window.DeviceMotionEvent) {
+            window.addEventListener("devicemotion", function(event) {
+                let acc = event.accelerationIncludingGravity;
+                document.getElementById("acceleration").innerText = 
+                    `加速度: X=${acc.x?.toFixed(2)}, Y=${acc.y?.toFixed(2)}, Z=${acc.z?.toFixed(2)}`;
+            });
+        }
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener("deviceorientation", function(event) {
+                document.getElementById("rotation").innerText = 
+                    `回転: α=${event.alpha?.toFixed(2)}, β=${event.beta?.toFixed(2)}, γ=${event.gamma?.toFixed(2)}`;
+            });
+        }
+    </script>
+</body>
+</html>
